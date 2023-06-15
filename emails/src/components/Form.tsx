@@ -1,23 +1,19 @@
-type newItem = {
-    content: string;
-};
 
-function Form(props: {setItem: any, item: newItem}) {
-    const { item, setItem} = props
+function Form(props: {setItem: any, item: string, items: any, setItems: any}) {
+    const { item, setItem, items, setItems} = props
 
     const handleSubmit = (e: any) =>{
         e.preventDefault();
-        console.log("hola")
-        //setItem = .....
+        setItems([...items, item]);
+        setItem("")
     }
   return (
     <form onSubmit={handleSubmit} className="flex-col justify-center">
       <textarea 
-        value={item.content} 
-        onChange={setItem} 
-        rows={5}
+        value={item}
+        onChange={e => setItem(e.target.value)}
         className="w-auto px-10" />
-        <button className="bg-blue-600 my-5 py-3 px-3 rounded text-white font-bold hover:bg-blue-500">Confirmar!</button>
+        <button className="bg-blue-600 my-5 py-3 px-3 rounded text-white font-bold hover:bg-blue-500">Agregar!</button>
     </form>
   )
 }
