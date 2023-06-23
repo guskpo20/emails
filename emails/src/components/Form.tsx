@@ -20,8 +20,9 @@ function Form(props: {setItem: any, item: string, setEmail: any}) {
         value={item}
         onChange={e => setItem(e.target.value)}
         className="w-auto px-10" 
-        rows={4} cols={40}
+        rows={30} cols={40}
         />
+        <br></br>
         <button className="bg-blue-600 my-5 py-3 px-3 rounded text-white font-bold hover:bg-blue-500">Agregar!</button>
     </form>
   )
