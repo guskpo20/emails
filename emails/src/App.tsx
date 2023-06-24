@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Form  from "./components/Form"
 import ItemList from './components/ItemList';
+import styles from "../src/styles/styles.css"
 
 
 
@@ -11,25 +12,51 @@ function App() {
   const [showedImages, setShowedImages] = useState(false);
   const [mobileVersion, setMobileVersion] = useState(false);
 
-  const showLinks = (e: any) =>{
-    e.preventDefault();
+  /* const initLinksToolTip = () =>{
     const fullEmail = document.getElementById("email")
+    if(fullEmail){
+      const links = fullEmail.querySelectorAll("a")
+      for (const link of links) {
+        link.classList.add("tooltip")
+        link.setAttribute("title", link.href)
+      }  
+      
+    }
+  }
 
+  useEffect(() => {
+    return () => {
+      if(item){
+        initLinksToolTip()
+      }
+    };
+  }, [item]) */
+
+  
+
+  const showLinks = () =>{
+    const fullEmail = document.getElementById("email")
+    if(showedImages){
+      showImages()
+    }
+    
     if(fullEmail){
       const links = fullEmail.querySelectorAll("a")
       if(links){
         if(showedLinks){
           for (let i = 0; i < links.length; i++) {
-            if(links[i].getAttribute("href")){
-              links[i].style.background  = ""
-            }else{
-              links[i].style.background  = ""
+            links[i].style.background  = ""
+            if(links[i].getElementsByTagName("img").length > 0){
+              links[i].getElementsByTagName("img")[0].style.border  = ""
             }
           }
         }else{
           for (let i = 0; i < links.length; i++) {
             if(links[i].getAttribute("href")){
               links[i].style.background  = "rgb(0,255,0)"
+              if(links[i].getElementsByTagName("img").length > 0){
+                links[i].getElementsByTagName("img")[0].style.border  = "3px solid green"
+              }
             }else{
               links[i].style.background  = "rgb(255,0,0)"
             }
@@ -44,8 +71,10 @@ function App() {
     
   }
 
-  const showImages = (e: any) =>{
-    e.preventDefault();
+  const showImages = () =>{
+    if(showedLinks){
+      showLinks()
+    }
     const fullEmail = document.getElementById("email")
     if(fullEmail){
       const images = fullEmail.querySelectorAll("img")
@@ -70,20 +99,26 @@ function App() {
     }
   }
 
-  const mobileChange = (e: any) => {
-    e.preventDefault()
+  const mobileChange = () => {
+    
+    /*
     const fullEmail = document.getElementById("email") 
     if(fullEmail){
+      
       const body = fullEmail.getElementsByTagName("body")[0]
-      if(body){
+      const table = body.querySelector<HTMLElement>("table[width='600']")
+      if(table){
         if(mobileVersion){
-          body.style.width = "480px !important"
+          console.log("hola")
+          table.style.width = "480px !important"
+          table.style.maxWidth="480px !important"
+          table.setAttribute("width", "400")
         }else{
-          body.style.width = "600px !important"
+          table.style.width = "600px !important"
         }
       }
       setMobileVersion(!mobileVersion);
-      }
+      } */
     }
   
 
@@ -98,7 +133,7 @@ function App() {
             <div className='flex justify-center gap-5 py-5'>
               <button className="bg-blue-600 my-5 py-3 px-3 rounded text-white font-bold hover:bg-blue-500" onClick={showLinks}>{showedLinks ? "Ocultar Links!" : "Señalar Links!"}</button>
               <button className="bg-blue-600 my-5 py-3 px-3 rounded text-white font-bold hover:bg-blue-500" onClick={showImages}>{showedImages ? "Ocultar Imagenes!" : "Señalar Imagenes!"}</button>
-              <button className="bg-blue-600 my-5 py-3 px-3 rounded text-white font-bold hover:bg-blue-500" onClick={mobileChange}>{mobileVersion ? "Version Desktop!" : "Version Mobile!"}</button>
+              <button className="bg-blue-600 my-5 py-3 px-3 rounded text-white font-bold hover:bg-blue-500" disabled onClick={mobileChange}>{mobileVersion ? "Version Desktop!" : "Version Mobile!"}</button>
             </div>
             <div className='px-32'>
               {showedLinks && 
@@ -111,7 +146,7 @@ function App() {
               }
             </div>
         </div>
-        <div className='pb-10 max-w-1/3 min-h-10 bg-white rounded min-w-[650px] h-auto'>
+        <div className='pb-10 max-w-1/3 min-h-screen bg-white rounded min-w-[650px] h-auto'>
           <ItemList item={item} email={email} />
         </div>
       </div>
