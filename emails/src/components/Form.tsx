@@ -9,21 +9,16 @@ function Form(props: {setItem: any, item: string, setEmail: any}) {
     }
 
 
-    /*
-    
-    El item tiene que ser un objeto que tenga 2 keys, los styles del td y lo que tiene actualmente
-    
-    */
   return (
     <form onSubmit={handleSubmit} className="flex-col justify-center align-middle">
       <textarea 
         value={item}
         onChange={e => setItem(e.target.value)}
         className="w-auto px-10" 
-        rows={30} cols={40}
+        rows={30} cols={70}
         />
         <br></br>
-        <button className="bg-blue-600 my-5 py-3 px-3 rounded text-white font-bold hover:bg-blue-500">Agregar!</button>
+        <button className="bg-black text-white my-5 py-3 px-3 rounded font-bold hover:bg-white hover:text-black">Agregar!</button>
     </form>
   )
 }

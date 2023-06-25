@@ -124,11 +124,11 @@ function App() {
 
   return (
     <div className='text-center bg-blue-600 h-max w-screen'>
-      <h3 className='text-5xl bold pt-10 pb-10'>Emails QA</h3>
+      <h3 className='text-5xl font-bold pt-10 pb-10 text-white'>Emails QA</h3>
       <div className='flex gap-3 justify-around flex-wrap'>
-        <div className='min-w-[650px] w-1/3 min-h-10 bg-blue-400 h-auto rounded pt-10 pb-10'>
+        <div className='min-w-[650px] w-1/3 min-h-10 bg-blue-400 h-auto rounded pt-5 pb-10'>
             
-            <h4 className='text-2xl bold pb-5'>Inserte el codigo del Email</h4>
+            <h4 className='text-2xl font-bold pb-5 text-white'>Inserte el codigo del Email</h4>
             <Form item={item} setItem={setItem} setEmail={setEmail} />
             <div className='flex justify-center gap-5 py-5'>
               <button className="bg-blue-600 my-5 py-3 px-3 rounded text-white font-bold hover:bg-blue-500" onClick={showLinks}>{showedLinks ? "Ocultar Links!" : "Señalar Links!"}</button>
